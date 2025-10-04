@@ -1,0 +1,16 @@
+# Environment files, Tells Git to ignore your .env file, which contains secret stuff like passwords and API keys.
+.env
+
+# Node dependencies, This folder contains all the packages (libraries) installed with npm. It’s huge and can easily be reinstalled, so you don’t want it in GitHub.
+node_modules/
+
+# Build outputs, When you build your app (for production), tools like React or Webpack generate folders called build/ or dist/. These contain compiled files — not your actual source code — so they don’t need to be tracked.
+/dist
+/build
+
+# Logs, These are automatically created when something goes wrong in npm or yarn. They’re just temporary debug files — safe to ignore.
+npm-debug.log
+yarn-error.log
+
+# OS junk, They’re totally useless to your project and should be ignored.
+.DS_Store
