@@ -1,24 +1,24 @@
-// index.js
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const sequelize = require('./config/database');
+const User = require('./models/User');
 
-// Import required libraries
-const express = require('express');  // Express framework
-const cors = require('cors');        // Allows cross-origin requests (frontend <-> backend)
-require('dotenv').config();          // Loads environment variables from .env
-
-// Initialize the app
 const app = express();
-const PORT = process.env.PORT || 5000; // Port from .env or default 5000
+const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());            // Enable CORS
-app.use(express.json());    // Parse incoming JSON requests
+app.use(cors());
+app.use(express.json());
 
-// Example route to test server
+// Test route
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-});
+// Connect to DB and start server
+sequelize.sync() // Creates tables based on models
+  .then(() => {
+    console.log('✅ Database synced successfully.');
+    app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+  })
+  .catch((err) => console.error('❌ Database sync failed:', err));
